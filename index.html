@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aldar Weekly Entry Only - Photo to Excel</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <h1>Aldar Weekly Entry Only - Photo to Excel</h1>
+        <p>Upload the photo, review the extracted data, then generate one clean Excel entry only. No old records are included.</p>
+      </div>
+      <div class="actions">
+        <button id="readBtn" class="btn secondary" type="button">Read Photo</button>
+        <button id="generateBtn" class="btn primary" type="button">Generate Entry Only Excel</button>
+      </div>
+    </header>
+
+    <section class="panel two-col">
+      <div class="panel">
+        <h2>Photo</h2>
+        <label class="upload"><input id="imageInput" type="file" accept="image/*" /><span>Choose scorecard photo</span></label>
+        <div class="image-wrap"><img id="imagePreview" alt="Preview" /><div id="imagePlaceholder" class="placeholder">Photo preview will appear here</div></div>
+        <div id="ocrStatus" class="status minor">Ready. Choose the photo, then click Read Photo.</div>
+      </div>
+      <div class="panel">
+        <h2>Extracted Entry Fields</h2>
+        <div class="grid grid-2">
+          <label class="field"><span>Inspection Date</span><input id="inspectionDate" type="date" /></label>
+          <label class="field"><span>Week No</span><input id="weekNo" type="number" readonly /></label>
+          <label class="field"><span>Month</span><input id="monthText" type="text" readonly /></label>
+          <label class="field"><span>Package</span><input id="package" type="text" /></label>
+          <label class="field"><span>Cluster</span><input id="cluster" type="text" /></label>
+          <label class="field"><span>Your Name / Inspector</span><input id="yourName" type="text" value="Javed Iqbal" /></label>
+          <label class="field"><span>Your Role</span><input id="yourRole" type="text" value="KEO" /></label>
+          <label class="field"><span>Stop Work</span><select id="stopWork"><option>YES</option><option>NO</option></select></label>
+          <label class="field full"><span>Area / Villa</span><input id="areaText" type="text" /></label>
+          <label class="field"><span>Main High Risk Activity</span><input id="mainActivity" type="text" /></label>
+          <label class="field"><span>Repeat Issue Seen</span><select id="repeatIssue"><option>YES</option><option>NO</option></select></label>
+          <label class="field"><span>Action Owner</span><input id="actionOwner" type="text" value="Construction Manager" /></label>
+          <label class="field"><span>Target Closeout Date</span><input id="targetCloseoutDate" type="date" /></label>
+          <label class="field"><span>Evidence_Link_or_Photo</span><input id="evidence" type="text" value="A site reference provided" /></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>KPI Scores</h2>
+      <div id="kpiGrid" class="grid grid-3"></div>
+      <div id="summaryBox" class="summary">Scores will be extracted from the photo. Review before export.</div>
+    </section>
+
+    <section class="panel">
+      <h2>Review Text Fields</h2>
+      <div class="grid grid-2">
+        <label class="field"><span>Likely Root Cause</span><input id="rootCause" type="text" /></label>
+        <label class="field"><span>Rating Band</span><input id="ratingBand" type="text" readonly /></label>
+        <label class="field full"><span>Top 3 Gaps Observed</span><textarea id="topGaps" rows="5"></textarea></label>
+        <label class="field full"><span>Immediate Action Taken</span><textarea id="immediateAction" rows="4"></textarea></label>
+        <label class="field full"><span>Preventive Action Required</span><textarea id="preventiveAction" rows="5"></textarea></label>
+        <label class="field full"><span>Positive Observations</span><textarea id="positiveObservations" rows="3"></textarea></label>
+      </div>
+      <div id="status" class="status">Ready.</div>
+      <details class="ocr-box"><summary>Detected OCR Text</summary><textarea id="ocrText" rows="12"></textarea></details>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
