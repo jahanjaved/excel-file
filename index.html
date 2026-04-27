@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aldar Weekly Inspection Photo to Excel</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Saadiyat Lagoons HSE</p>
+        <h1>Aldar Weekly Inspection Photo to Excel</h1>
+        <p class="lead">Upload the scorecard photo. The system reads the photo, fills the next row in <b>Weekly_Inspections</b>, and keeps the uploaded Excel template design, formulas and existing data.</p>
+      </div>
+      <div class="actions">
+        <button id="readBtn" class="btn secondary" type="button">Read Photo</button>
+        <button id="generateBtn" class="btn primary" type="button">Generate Excel</button>
+      </div>
+    </header>
+
+    <section class="panel two-col">
+      <div class="panel inner">
+        <h2>1. Upload Scorecard Photo</h2>
+        <label class="upload">
+          <input id="imageInput" type="file" accept="image/*" />
+          <span>Choose photo / screenshot</span>
+        </label>
+        <div class="image-wrap">
+          <img id="imagePreview" alt="Scorecard preview" />
+          <div id="imagePlaceholder" class="placeholder">Photo preview will appear here</div>
+        </div>
+        <div id="ocrStatus" class="status">Ready. Select the photo and click Read Photo.</div>
+      </div>
+
+      <div class="panel inner">
+        <h2>2. Extracted Photo Data</h2>
+        <div class="grid grid-2">
+          <label class="field"><span>Inspection Date</span><input id="inspectionDate" type="date" /></label>
+          <label class="field"><span>Package</span><input id="package" type="text" placeholder="2 / 3 / 4" /></label>
+          <label class="field"><span>Cluster</span><input id="cluster" type="text" placeholder="Cluster 8C" /></label>
+          <label class="field"><span>Report / Asite Ref</span><input id="asiteRef" type="text" placeholder="Detected if visible" /></label>
+          <label class="field"><span>Area / Villa</span><input id="area" type="text" placeholder="Detected if visible" /></label>
+          <label class="field"><span>Workers Observed</span><input id="workers" type="number" min="0" placeholder="Detected if visible" /></label>
+          <label class="field"><span>Inspector Name</span><input id="inspector" type="text" placeholder="Only if visible / required" /></label>
+          <label class="field"><span>Inspector Role</span><input id="role" type="text" placeholder="Only if visible / required" /></label>
+        </div>
+        <div class="note">Only the template input cells are updated. Formula cells are copied from the template pattern and not overwritten with website calculations.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. KPI Scores Detected from Photo</h2>
+      <div id="kpiGrid" class="grid grid-3"></div>
+      <div id="summaryBox" class="summary">Upload and read the photo to detect KPI scores.</div>
+    </section>
+
+    <section class="panel">
+      <h2>4. Intelligent Fields for Review</h2>
+      <div class="grid grid-2">
+        <label class="field"><span>Main High Risk Activity</span><input id="mainActivity" type="text" /></label>
+        <label class="field"><span>Stop Work</span><select id="stopWork"><option value=""></option><option>YES</option><option>NO</option></select></label>
+        <label class="field"><span>Repeat Issue Seen</span><select id="repeatIssue"><option value=""></option><option>YES</option><option>NO</option></select></label>
+        <label class="field"><span>Likely Root Cause</span><input id="rootCause" type="text" /></label>
+        <label class="field"><span>Action Owner</span><input id="actionOwner" type="text" placeholder="Construction Manager" /></label>
+        <label class="field"><span>Evidence Link / Photo</span><input id="evidence" type="text" placeholder="Asite Ref Provided" /></label>
+        <label class="field full"><span>Top 3 Gaps Observed</span><textarea id="topGaps" rows="4"></textarea></label>
+        <label class="field full"><span>Immediate Action Taken</span><textarea id="immediateAction" rows="3"></textarea></label>
+        <label class="field full"><span>Preventive Action Required</span><textarea id="preventiveAction" rows="5"></textarea></label>
+        <label class="field full"><span>Positive Observations</span><textarea id="positiveObservations" rows="2"></textarea></label>
+      </div>
+      <div id="status" class="status">Ready.</div>
+      <details class="ocr-box">
+        <summary>OCR text from photo</summary>
+        <textarea id="ocrText" rows="12" readonly></textarea>
+      </details>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
