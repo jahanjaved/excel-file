@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALDAR Weekly KPI Photo to Original Excel Row</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><img src="aldar.png" alt="ALDAR"><div><h1>ALDAR Weekly KPI Photo → Original Excel Row</h1><p>Reads the photo, auto-fills the website, then updates the next empty row in the original workbook without changing design, column sizes, formulas, sheets, charts or dashboard structure.</p></div></div>
+  <div class="header-actions"><button id="readBtn" class="btn secondary">Read Photo Again</button><button id="updateBtn" class="btn primary">Generate Updated Excel</button></div>
+</header>
+<section class="notice"><b>Final direct-update engine:</b> this website edits the original XLSX XML package directly. It only writes values into the next empty pre-formatted row of <b>Weekly_Inspections</b>. Anything not read from the photo can stay blank and can be completed manually before download.</section>
+<main class="layout">
+<section class="card photo-card"><div class="section-title"><span>1</span><h2>Upload photo</h2></div><label class="upload"><input id="imageInput" type="file" accept="image/*"><strong>Choose KPI photo / screenshot</strong><em>OCR starts automatically</em></label><div class="image-box"><img id="preview"><div id="ph">Photo preview</div></div><div id="ocrStatus" class="status">Ready.</div></section>
+<section class="card"><div class="section-title"><span>2</span><h2>Original Excel</h2></div><label class="upload compact"><input id="excelInput" type="file" accept=".xlsx,.xlsm"><strong>Optional: choose latest original Excel</strong><em>If not selected, included original.xlsx will be used.</em></label><div id="excelStatus" class="status success">Included original.xlsx ready.</div><div class="section-title small"><span>3</span><h2>Auto-filled / manual fields</h2></div><div class="form-grid">
+<label><b>Inspection Date</b><input id="inspectionDate" type="date"></label><label><b>Week No</b><input id="weekNo" readonly></label>
+<label><b>Package</b><input id="package"></label><label><b>Cluster</b><input id="cluster" placeholder="Cluster 2C"></label>
+<label><b>Contractor</b><input id="contractor" placeholder="Auto from cluster"></label><label><b>Your Name</b><input id="yourName" value="Javed Iqbal"></label>
+<label><b>Your Role</b><input id="yourRole" value="KEO"></label><label><b>Workers Observed</b><input id="workersObserved" placeholder="Leave empty if not known"></label>
+<label><b>Area / Villa</b><input id="areaText" placeholder="Villa / Road / Cluster Area"></label><label><b>Main High Risk Activity</b><input id="mainActivity"></label>
+<label><b>Stop Work</b><select id="stopWork"><option></option><option>YES</option><option>NO</option></select></label><label><b>Repeat Issue Seen</b><select id="repeatIssue"><option></option><option>YES</option><option>NO</option></select></label>
+<label><b>Action Owner</b><input id="actionOwner" value="Project Manager and Construction Manager"></label><label><b>Target Closeout Date</b><input id="targetCloseoutDate" type="date"></label>
+<label class="wide"><b>Evidence Link / Photo Reference</b><input id="evidence" placeholder="Photo reference / link / leave empty"></label>
+</div></section>
+</main>
+<section class="card"><div class="section-title"><span>4</span><h2>KPI scores from photo or manual entry</h2></div><div id="kpiGrid" class="kpi-grid"></div><div id="summary" class="summary">Review scores before generating Excel.</div></section>
+<section class="card"><div class="section-title"><span>5</span><h2>Auto text fields</h2></div><div class="form-grid text-grid">
+<label><b>Likely Root Cause</b><input id="rootCause"></label><label><b>Rating Band</b><input id="ratingBand" readonly></label>
+<label class="wide"><b>Top 3 Gaps Observed</b><textarea id="topGaps" rows="4"></textarea></label>
+<label class="wide"><b>Immediate Action Taken</b><textarea id="immediateAction" rows="4"></textarea></label>
+<label class="wide"><b>Preventive Action Required</b><textarea id="preventiveAction" rows="4"></textarea></label>
+<label class="wide"><b>Positive Observations</b><textarea id="positiveObservations" rows="3"></textarea></label>
+</div><div id="status" class="status">Ready. The next empty row in the original file will be filled.</div><details><summary>OCR raw text</summary><textarea id="ocrText" rows="10"></textarea></details></section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
