@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALDAR Exact Original Excel Row Updater</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><img src="aldar.png" alt="ALDAR"><div><h1>ALDAR Exact Original Excel Row Updater</h1><p>Reads photo, fills website fields, then writes into the original Weekly_Inspections row without changing Excel style.</p></div></div>
+  <div class="top-actions"><button id="readBtn" class="btn light">Read Photo</button><button id="updateBtn" class="btn dark">Create Updated Excel</button></div>
+</header>
+<section class="notice"><b>Exact-format mode:</b> the system uses your original workbook as the master, keeps original column widths, row heights, fonts, font sizes, fills, borders, alignment, formulas, hidden/unhidden settings and dashboard sheets. Only cell values in the next empty pre-formatted row are updated.</section>
+<section class="layout">
+  <div class="card"><h2>1. Upload Photo</h2><label class="upload"><input id="imageInput" type="file" accept="image/*"><span>Choose observation / KPI photo</span></label><div class="preview-box"><img id="preview"><div id="ph">Photo preview</div></div><div id="ocrStatus" class="status">Ready.</div></div>
+  <div class="card"><h2>2. Original Excel</h2><label class="upload"><input id="excelInput" type="file" accept=".xlsx,.xlsm"><span>Choose original Excel file</span></label><div id="excelStatus" class="status ok">Included original.xlsx ready.</div><div class="small-note">Use your latest original file when needed. Browser will download a new updated file because it cannot overwrite your local file directly.</div></div>
+</section>
+<section class="card"><h2>3. Main Entry Data</h2><div id="mainFields" class="fields"></div></section>
+<section class="card"><h2>4. KPI Scores from Photo / Manual Entry</h2><div id="kpiGrid" class="kpis"></div><div id="summary" class="summary">No scores yet.</div></section>
+<section class="card"><h2>5. Auto Text and Closeout Data</h2><div id="textFields" class="fields"></div></section>
+<section class="card"><h2>6. Full Original Columns A to BG</h2><p class="small-note">Review all original columns. Auto/formula columns are kept in the Excel row; manual fields can be edited before export.</p><div id="allColumns" class="columns-grid"></div></section>
+<section class="card"><h2>OCR Raw Text</h2><textarea id="ocrText" rows="8" placeholder="OCR text will appear here. You can edit it and click Read Photo again if needed."></textarea><div id="status" class="status">Ready to create Excel row.</div></section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
