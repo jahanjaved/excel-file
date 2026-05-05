@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALDAR Smart OCR Excel Updater</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+<div class="page">
+<header class="hero"><div class="brand"><img src="aldar.png"><div><h1>ALDAR Smart OCR Excel Updater</h1><p>Smart OCR reads the inspection photo, auto-fills the website fields, then lets you review before updating the original Excel row.</p></div></div><div class="actions"><button id="readBtn" class="btn secondary">Option A: Auto Read Photo</button><button id="updateBtn" class="btn primary">Option B: Review + Update Excel</button></div></header>
+<section class="panel warning"><b>Noor final smart OCR system:</b> This version keeps the original workbook structure and adds a dedicated ALDAR checklist score-column OCR reader. It copies the exact style ID from the existing/template row for each updated cell, so font, text color, background color, borders, alignment, row/column structure, charts and formulas remain untouched.</section>
+<section class="two-col">
+<div class="panel"><h2>1. Photo</h2><label class="upload"><input id="imageInput" type="file" accept="image/*"><span>Choose KPI photo / Excel screenshot</span></label><div class="image-wrap"><img id="preview"><div id="ph" class="placeholder">Photo preview</div></div><div id="ocrStatus" class="status">Ready.</div></div>
+<div class="panel"><h2>2. Original Excel</h2><label class="upload"><input id="excelInput" type="file" accept=".xlsx,.xlsm"><span>Choose your original Excel file</span></label><p class="hint">If not uploaded, included original.xlsx will be used.</p><div id="excelStatus" class="status">Included original.xlsx ready.</div>
+<h2>3. Website Data</h2><div class="grid grid-2">
+<label class="field"><span>Date</span><input id="inspectionDate" type="date"></label><label class="field"><span>Week</span><input id="weekNo" readonly></label>
+<label class="field"><span>Package</span><input id="package"></label><label class="field"><span>Cluster</span><input id="cluster"></label>
+<label class="field"><span>Contractor</span><input id="contractor"></label><label class="field"><span>Inspector Name</span><input id="yourName" value="Javed Iqbal"></label>
+<label class="field"><span>Your Role</span><input id="yourRole" value="KEO"></label><label class="field"><span>Stop Work</span><select id="stopWork"><option>YES</option><option>NO</option></select></label>
+<label class="field full"><span>Area / Villa</span><input id="areaText"></label><label class="field"><span>Main High Risk Activity</span><input id="mainActivity"></label>
+<label class="field"><span>Repeat Issue Seen</span><select id="repeatIssue"><option>YES</option><option>NO</option></select></label><label class="field"><span>Action Owner</span><input id="actionOwner" value="Project Manager and Construction Manager"></label>
+<label class="field"><span>Target Closeout Date</span><input id="targetCloseoutDate" type="date"></label><label class="field full"><span>Evidence</span><input id="evidence" value="A site reference provided"></label>
+</div></div></section>
+<section class="panel"><h2>4. KPI Scores</h2><div id="kpiGrid" class="grid grid-3"></div><div id="summary" class="summary">Option A auto-fills scores from the photo. Option B: review and correct these scores before updating Excel.</div></section>
+<section class="panel"><h2>5. Auto Text</h2><div class="grid grid-2">
+<label class="field"><span>Likely Root Cause</span><input id="rootCause"></label><label class="field"><span>Rating Band</span><input id="ratingBand" readonly></label>
+<label class="field full"><span>Top 3 Gaps Observed</span><textarea id="topGaps" rows="4"></textarea></label>
+<label class="field full"><span>Immediate Action Taken</span><textarea id="immediateAction" rows="4"></textarea></label>
+<label class="field full"><span>Preventive Action Required</span><textarea id="preventiveAction" rows="4"></textarea></label>
+<label class="field full"><span>Positive Observations</span><textarea id="positiveObservations" rows="3"></textarea></label></div>
+<div id="status" class="status">Ready. It will fill the next empty row already available in the original file.</div>
+<details><summary>OCR Text</summary><textarea id="ocrText" rows="10"></textarea></details></section>
+</div><script src="app.js"></script></body></html>
