@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALDAR Manual KPI Excel Updater</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+<body>
+<div class="page">
+<header class="hero"><div class="brand"><img src="aldar.png"><div><h1>ALDAR Manual KPI Excel Updater</h1><p>Enter KPI values manually, review the auto text, then update the original Excel row or copy the exact Excel row data for manual paste.</p></div></div><div class="actions"><button id="updateBtn" class="btn primary">Update Excel</button><button id="copyBtn" class="btn copy">Copy Data for Excel</button></div></header>
+<section class="panel warning"><b>Noor manual KPI system with ALDAR reference number and Excel copy button:</b> The photo upload and scanning option has been removed. Enter the KPI scores manually. The system keeps the original workbook structure, saves the full reference number in Excel column A from the last digits entered on the website, and includes a copy button to copy the exact row data for direct manual paste into the main Excel file.</section>
+<section class="panel"><h2>1. Original Excel</h2><label class="upload"><input id="excelInput" type="file" accept=".xlsx,.xlsm"><span>Choose your original Excel file</span></label><p class="hint">If not uploaded, included original.xlsx will be used.</p><div id="excelStatus" class="status">Included original.xlsx ready.</div>
+<h2>2. Website Data</h2><div class="grid grid-2">
+<label class="field"><span>Reference Number</span><input id="referenceDigits" inputmode="numeric" placeholder="Enter last digits only, e.g. 290"></label>
+<label class="field"><span>Date</span><input id="inspectionDate" type="date"></label><label class="field"><span>Week</span><input id="weekNo" readonly></label>
+<label class="field"><span>Package</span><select id="package"><option value="">Select package</option><option value="2">2</option><option value="4">4</option></select></label><label class="field"><span>Cluster</span><select id="cluster"><option value="">Select cluster</option></select></label>
+<label class="field"><span>Contractor</span><input id="contractor" value="TAJV"></label><label class="field"><span>Inspector Name</span><input id="yourName" value="Javed Iqbal"></label>
+<label class="field"><span>Your Role</span><input id="yourRole" value="KEO"></label><label class="field"><span>Stop Work</span><select id="stopWork"><option>YES</option><option>NO</option></select></label>
+<label class="field full"><span>Area / Villa</span><input id="areaText"></label><label class="field"><span>Main High Risk Activity</span><input id="mainActivity"></label>
+<label class="field"><span>Repeat Issue Seen</span><select id="repeatIssue"><option>YES</option><option>NO</option></select></label><label class="field"><span>Action Owner</span><input id="actionOwner" value="Project Manager and Construction Manager"></label>
+<label class="field"><span>Target Closeout Date</span><input id="targetCloseoutDate" type="date"></label><label class="field full"><span>Evidence</span><input id="evidence" value="A site reference provided"></label>
+</div></section>
+<section class="panel"><h2>3. KPI Scores</h2><div id="kpiGrid" class="grid grid-3"></div><div id="summary" class="summary">Enter KPI scores manually, then review the calculated band and auto text before updating or copying to Excel.</div></section>
+<section class="panel"><h2>4. Auto Text</h2><div class="grid grid-2">
+<label class="field"><span>Likely Root Cause</span><input id="rootCause"></label><label class="field"><span>Rating Band</span><input id="ratingBand" readonly></label>
+<label class="field full"><span>Top 3 Gaps Observed</span><textarea id="topGaps" rows="4"></textarea></label>
+<label class="field full"><span>Immediate Action Taken</span><textarea id="immediateAction" rows="4"></textarea></label>
+<label class="field full"><span>Preventive Action Required</span><textarea id="preventiveAction" rows="4"></textarea></label>
+<label class="field full"><span>Positive Observations</span><textarea id="positiveObservations" rows="3"></textarea></label></div>
+<div id="status" class="status">Ready. It will fill the next empty row already available in the original file.</div>
+</section>
+</div><script src="app.js"></script></body></html>
